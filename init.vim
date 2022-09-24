@@ -1,60 +1,48 @@
-" Basic config
 syntax on
-set number
-set cursorline
-set tabstop=4
-set shiftwidth=4
-set history=1000
+filetype plugin indent on
+set ts=4 et sts=4 sw=4 ai si
+set rnu
 set clipboard=unnamed
-set nowrap
-set ignorecase
-"set termguicolors
+set termguicolors
 
-" GUI config
-set guifont=Consolas:h15
-
-" Plugins download
 call plug#begin()
-	" Color schemes
+    "Plug 'catppuccin/nvim', {'as': 'catppuccin'}
 	Plug 'morhetz/gruvbox'
 	Plug 'ghifarit53/tokyonight-vim' 
 	Plug 'rebelot/kanagawa.nvim'
+    Plug 'kaicataldo/material.vim'
+    Plug 'dracula/vim'
+    Plug 'wuelnerdotexe/vim-enfocado'
 
-	" Other plugins
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
 	Plug 'preservim/nerdtree'
-	"Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-	"Plug 'nvim-lua/plenary.nvim'
-	"Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
-
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
-" Colorscheme
-colorscheme kanagawa
-"colorscheme gruvbox
-"colorscheme tokyonight
+let g:coc_global_extensions = ['coc-git', 'coc-rust-analyzer', 'coc-vimlsp', 'coc-java', 'coc-html', 'coc-clangd']
 
-" NERDTree config
-" Show NERDTree on start
-autocmd VimEnter * NERDTree | wincmd p
-" Close NERDTree split when it's the last split
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+
+inoremap <c-b> <Esc>:NERDTreeToggle<cr>
+nnoremap <c-b> <Esc>:NERDTreeToggle<cr>
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
-" Neovide config
-let g:neovide_cursor_animation_length=0.05
+let g:catppuccin_flavour = "macchiato" " latte, frappe, macchiato, mocha
 
+"lua << EOF
+"require("catppuccin").setup()
+"EOF
 
-" 
-"if !exists("g:os")
-"    if has("win64") || has("win32") || has("win16")
-"        let g:os = "Windows"
-"    else
-"        let g:os = substitute(system('uname'), '\n', '', '')
-"    endif
-"endif
-"
-"if g:os == "Windows"
-"	:cd C:\Users\mis\Desktop
-"endif
+"colo kanagawa
+ colo gruvbox
+"colo tokyonight
+
