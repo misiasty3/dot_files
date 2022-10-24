@@ -6,12 +6,13 @@ set clipboard=unnamed
 set termguicolors
 
 call plug#begin()
-    "Plug 'catppuccin/nvim', {'as': 'catppuccin'}
+    Plug 'catppuccin/nvim', {'as': 'catppuccin'}
 	Plug 'morhetz/gruvbox'
 	Plug 'ghifarit53/tokyonight-vim' 
 	Plug 'rebelot/kanagawa.nvim'
     Plug 'kaicataldo/material.vim'
     Plug 'dracula/vim'
+    Plug 'sickill/vim-monokai'
     Plug 'wuelnerdotexe/vim-enfocado'
 
 	Plug 'vim-airline/vim-airline'
@@ -35,12 +36,6 @@ inoremap <silent><expr> <TAB>
 inoremap <c-b> <Esc>:NERDTreeToggle<cr>
 nnoremap <c-b> <Esc>:NERDTreeToggle<cr>
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-
-let g:catppuccin_flavour = "macchiato" " latte, frappe, macchiato, mocha
-
-"lua << EOF
-"require("catppuccin").setup()
-"EOF
 
 "colo kanagawa
  colo gruvbox
