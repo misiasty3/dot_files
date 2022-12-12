@@ -1,7 +1,7 @@
 syntax on
 filetype plugin indent on
 set ts=4 et sts=4 sw=4 ai si
-set rnu
+set number
 set clipboard=unnamed
 set termguicolors
 
@@ -21,7 +21,7 @@ call plug#begin()
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
-let g:coc_global_extensions = ['coc-git', 'coc-rust-analyzer', 'coc-vimlsp', 'coc-java', 'coc-html', 'coc-clangd']
+let g:coc_global_extensions = ['coc-git', 'coc-rust-analyzer', 'coc-vimlsp', 'coc-java', 'coc-html']
 
 function! CheckBackspace() abort
   let col = col('.') - 1
@@ -32,10 +32,6 @@ inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
       \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
-
-inoremap <c-b> <Esc>:NERDTreeToggle<cr>
-nnoremap <c-b> <Esc>:NERDTreeToggle<cr>
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
 "colo kanagawa
  colo gruvbox
